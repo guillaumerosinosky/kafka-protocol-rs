@@ -136,7 +136,7 @@ fn second_record() {
 fn multiple_records() {
     let mut res = vec![];
     res.extend_from_slice(&HEADERS[..]);
-    res.extend_from_slice(&[0x00, 0x00, 0x00, 0x4f]);
+    res.extend_from_slice(&[0x00, 0x00, 0x00, 0x9e]);
     res.extend_from_slice(&FIRST_RECORD[..]);
     res.extend_from_slice(&SECOND_RECORD[..]);
 
@@ -153,7 +153,7 @@ fn multiple_records() {
 
             let mut records = partition.records.unwrap();
             let records = RecordBatchDecoder::decode(&mut records).unwrap();
-            assert_eq!(records.len(), 1);
+            assert_eq!(records.len(), 2);
         }
     }
 }
