@@ -434,7 +434,9 @@ impl RecordBatchDecoder {
         }
         Ok(records)
     }
-    fn decode_batch<B: ByteBuf>(buf: &mut B, records: &mut Vec<Record>) -> Result<(), DecodeError> {
+
+    /// Decode the buffer into a record and add it to the provided vec of records
+    pub fn decode_batch<B: ByteBuf>(buf: &mut B, records: &mut Vec<Record>) -> Result<(), DecodeError> {
         let version = buf.try_peek_bytes(MAGIC_BYTE_OFFSET..(MAGIC_BYTE_OFFSET + 1))?[0] as i8;
         debug!("Decoding record batch (version: {})", version);
         match version {
