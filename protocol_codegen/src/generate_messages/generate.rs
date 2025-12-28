@@ -797,7 +797,7 @@ fn write_decode_tag_buffer<W: Write>(
 
                 if sorted_tagged_fields.is_empty() {
                     writeln!(w, "let mut unknown_value = vec![0; size as usize];")?;
-                    writeln!(w, "buf.try_copy_to_slice(&mut unknown_value)?;")?;
+                    writeln!(w, "ByteBuf::try_copy_to_slice(buf, &mut unknown_value)?;")?;
                     write!(
                         w,
                         "unknown_tagged_fields.insert(tag as i32, unknown_value);"
@@ -877,7 +877,7 @@ fn write_decode_tag_buffer<W: Write>(
                         write!(w, "_ => ")?;
                         w.block(|w| {
                             writeln!(w, "let mut unknown_value = vec![0; size as usize];")?;
-                            writeln!(w, "buf.try_copy_to_slice(&mut unknown_value)?;")?;
+                            writeln!(w, "ByteBuf::try_copy_to_slice(buf, &mut unknown_value)?;")?;
                             write!(
                                 w,
                                 "unknown_tagged_fields.insert(tag as i32, unknown_value);"

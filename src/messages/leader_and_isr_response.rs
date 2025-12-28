@@ -117,7 +117,7 @@ impl Decodable for LeaderAndIsrPartitionError {
                 let tag: u32 = types::UnsignedVarInt.decode(buf)?;
                 let size: u32 = types::UnsignedVarInt.decode(buf)?;
                 let mut unknown_value = vec![0; size as usize];
-                buf.try_copy_to_slice(&mut unknown_value)?;
+                ByteBuf::try_copy_to_slice(buf, &mut unknown_value)?;
                 unknown_tagged_fields.insert(tag as i32, unknown_value);
             }
         }
@@ -246,7 +246,7 @@ impl MapDecodable for LeaderAndIsrTopicError {
                 let tag: u32 = types::UnsignedVarInt.decode(buf)?;
                 let size: u32 = types::UnsignedVarInt.decode(buf)?;
                 let mut unknown_value = vec![0; size as usize];
-                buf.try_copy_to_slice(&mut unknown_value)?;
+                ByteBuf::try_copy_to_slice(buf, &mut unknown_value)?;
                 unknown_tagged_fields.insert(tag as i32, unknown_value);
             }
         }
@@ -394,7 +394,7 @@ impl Decodable for LeaderAndIsrResponse {
                 let tag: u32 = types::UnsignedVarInt.decode(buf)?;
                 let size: u32 = types::UnsignedVarInt.decode(buf)?;
                 let mut unknown_value = vec![0; size as usize];
-                buf.try_copy_to_slice(&mut unknown_value)?;
+                ByteBuf::try_copy_to_slice(buf, &mut unknown_value)?;
                 unknown_tagged_fields.insert(tag as i32, unknown_value);
             }
         }
